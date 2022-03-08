@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: build only specified notes
-
 set -Eeuo pipefail
 
 dir_root=$(dirname "$(readlink -f "$0")")
@@ -10,6 +8,19 @@ dir_out=$dir_root/out
 
 log() {
     echo >&2 "${1-}"
+}
+
+usage() {
+    cat <<EOM
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-n name] [-b name]
+
+Available options:
+-h    Print this help and exit
+-v    Enable verbose output
+-n    Initialize new notes directory
+-b    Build specified notes directory
+EOM
+    exit
 }
 
 init() {
@@ -41,18 +52,6 @@ Example figure
 EOF
 
     exit 0
-}
-
-usage() {
-    cat <<EOM
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] -n name arg1 [arg2...]
-
-Available options:
--h    Print this help and exit
--v    Enable verbose output
--n    Initialize new notes directory
-EOM
-    exit
 }
 
 build() {
@@ -88,25 +87,25 @@ build() {
         --output="$dir_out"/"$1".pdf
 }
 
-mkdir -p "$dir_notes"
+build_target=''
 
-while getopts vn:h opt; do
+while getopts vn:b:h opt; do
     case $opt in
     v) set -x ;;
     n) init "$OPTARG" ;;
+    b) build_target="$OPTARG" ;;
     h | *) usage ;;
     esac
 done
-
-if ! command -v pandoc &>/dev/null; then
-    log "pandoc not found!"
-    exit 1
-fi
 
 rm -rf "$dir_out"
 mkdir -p "$dir_out"
 
 cd "$dir_notes"
-for dir in *; do
-    build "$dir"
-done
+if [ -z "$build_target" ]; then
+    for dir in *; do
+        build "$dir"
+    done
+else
+    build "$build_target"
+fi
