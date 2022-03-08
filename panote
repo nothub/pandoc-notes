@@ -25,11 +25,11 @@ EOM
 
 init() {
   if [ -d "$dir_notes"/"$1" ]; then
-    log "directory present: $(realpath "$1")"
+    log "directory present: $(realpath "$dir_notes"/"$1")"
     exit 1
   fi
 
-  log "creating notes directory: $(realpath "$1")"
+  log "creating notes directory: $(realpath "$dir_notes"/"$1")"
   mkdir -p "$dir_notes"/"$1"
 
   cat <<EOF >"$dir_notes"/"$1"/metadata.yaml
