@@ -1,0 +1,25 @@
+# ignore all files
+*
+# but include directories
+!*/
+
+# git
+!/.gitattributes
+!/.gitignore
+
+# notes
+!/common/**
+!/notes/**
+
+# build
+!/build.sh
+
+# ci
+!/.github/**
+
+# docs
+!/README.md
+
+# misc
+!/.editorconfig
+!/LICENSE
