@@ -31,8 +31,8 @@ build() {
         return
     fi
 
-    if [ ! -f "$1"/notes.md ]; then
-        log "missing notes.md in: $(realpath "$1")"
+    if [ -z "$(find "$1" -iname '*.md')" ]; then
+        log "no markdown files in: $(realpath "$1")"
         return
     fi
 
@@ -46,7 +46,7 @@ build() {
         --to=latex \
         --template=../common/eisvogel.tex \
         "$1"/metadata.yaml \
-        "$1"/notes.md \
+        "$1"/*.md \
         ../common/metadata.yaml \
         --output="$dir_out"/"$1".pdf
 }
