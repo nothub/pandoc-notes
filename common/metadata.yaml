@@ -1,0 +1,11 @@
+---
+subtitle: "Foo Bar Studies"
+author:
+  - "nothub <<mail+example@hub.lol>>"
+  - "John Doe <<j.doe@example.org>>"
+titlepage: true
+titlepage-logo: ../common/logo.png
+logo-width: 75mm
+toc-depth: 2
+toc-own-page: true
+---
