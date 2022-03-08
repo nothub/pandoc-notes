@@ -12,7 +12,7 @@
 !/notes/**
 
 # build
-!/notes.sh
+!/panote
 
 # ci
 !/.github/**

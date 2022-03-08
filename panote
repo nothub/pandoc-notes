@@ -18,7 +18,7 @@ Available options:
 -h    Print this help and exit
 -v    Enable verbose output
 -n    Initialize new notes directory
--b    Build specified notes directory
+-b    Compile only specified notes
 EOM
     exit
 }
