@@ -12,7 +12,7 @@
 !/notes/**
 
 # build
-!/build.sh
+!/notes.sh
 
 # ci
 !/.github/**
