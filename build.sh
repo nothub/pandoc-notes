@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# TODO: arg parsing
+# TODO: create new notes subdir with command
+# TODO: build only specified notes
+
 set -Eeuxo pipefail
 
 dir_root=$(dirname "$(readlink -f "$0")")
