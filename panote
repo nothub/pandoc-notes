@@ -12,14 +12,20 @@ log() {
 
 usage() {
   cat <<EOM
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-n name] [-b name]
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-V] [-v] [-n name] [-b name]
 
 Available options:
 -h    Print this help and exit
+-V    Print version and exit
 -v    Enable verbose output
 -n    Initialize new notes directory
 -b    Compile only specified notes
 EOM
+  exit
+}
+
+version() {
+  log "panote 0.1"
   exit
 }
 
@@ -91,9 +97,10 @@ build() {
 
 build_target=''
 
-while getopts vn:b:h opt; do
+while getopts vVn:b:h opt; do
   case $opt in
   v) set -x ;;
+  V) version ;;
   n) init "$OPTARG" ;;
   b) build_target="$OPTARG" ;;
   h | *) usage ;;
