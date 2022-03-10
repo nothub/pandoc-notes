@@ -2,6 +2,8 @@
 
 set -Eeuo pipefail
 
+version="0.1"
+
 dir_root=$(dirname "$(readlink -f "$0")")
 dir_notes=$dir_root/notes
 dir_out=$dir_root/out
@@ -25,7 +27,7 @@ EOM
 }
 
 version() {
-  log "panote 0.1"
+  log "panote ${version}"
   exit
 }
 
