@@ -1,3 +1,5 @@
+## 0 Index Heading
+
 # Heading Level 1
 
 Example Text <!--- this is a comment and will be ignored by pandoc --->
@@ -6,7 +8,7 @@ Example Text <!--- this is a comment and will be ignored by pandoc --->
 
 Example image figure
 
-![Moe Szyslak](https://www.w3.org/Icons/Misc/simpsons_moe.gif)
+![ye olde man pages](man.gif)
 
 ### Heading Level 3
 

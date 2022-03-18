@@ -82,6 +82,8 @@ build() {
 
   mkdir -p "$dir_out"
 
+  cd "$1"
+
   pandoc --standalone \
     --fail-if-warnings \
     --highlight-style tango \
@@ -90,11 +92,13 @@ build() {
     --toc-depth=2 \
     --from=markdown \
     --to=latex \
-    --template=../common/eisvogel.tex \
-    "$1"/metadata.yaml \
-    "$1"/*.md \
-    ../common/metadata.yaml \
+    --template="$dir_root"/common/eisvogel.tex \
+    metadata.yaml \
+    *.md \
+    "$dir_root"/common/metadata.yaml \
     --output="$dir_out"/"$1".pdf
+
+    cd ..
 }
 
 build_target=''
