@@ -8,4 +8,5 @@ titlepage-logo: ../../common/logo.png
 logo-width: 75mm
 toc-depth: 2
 toc-own-page: true
+footer-left: "Ministry of Silly Talks"
 ---
