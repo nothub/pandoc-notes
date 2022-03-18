@@ -1,4 +1,4 @@
-## 0 Index Heading
+## ToC Index 0 Heading
 
 # Heading Level 1
 
