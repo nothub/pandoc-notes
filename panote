@@ -92,6 +92,7 @@ build() {
     --toc-depth=2 \
     --from=markdown \
     --to=latex \
+    --pdf-engine=xelatex \
     --template="$dir_root"/common/eisvogel.tex \
     metadata.yaml \
     *.md \
