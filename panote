@@ -2,12 +2,6 @@
 
 set -Eeuo pipefail
 
-version="0.1"
-
-dir_root=$(dirname "$(readlink -f "$0")")
-dir_notes=$dir_root/notes
-dir_out=$dir_root/out
-
 log() {
   echo >&2 "${1-}"
 }
@@ -25,13 +19,15 @@ EOM
   exit
 }
 
-version() {
-  log "panote ${version}"
-  exit
+check_dependency() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "missing dependency: $1"
+    exit 1
+  fi
 }
 
 init() {
-  if [ -d "$dir_notes"/"$1" ]; then
+  if [[ -d "$dir_notes"/"$1" ]]; then
     log "directory present: $(realpath "$dir_notes"/"$1")"
     exit 1
   fi
@@ -64,17 +60,17 @@ EOF
 build() {
   echo building "$(realpath "$1")"
 
-  if [ ! -d "$1" ]; then
+  if [[ ! -d $1 ]]; then
     log "not a directory: $(realpath "$1")"
     return
   fi
 
-  if [ ! -f "$1"/metadata.yaml ]; then
+  if [[ ! -f $1/metadata.yaml ]]; then
     log "missing metadata.yaml in: $(realpath "$1")"
     return
   fi
 
-  if [ -z "$(find "$1" -iname '*.md')" ]; then
+  if [[ -z $(find "$1" -iname "*.md") ]]; then
     log "no markdown files in: $(realpath "$1")"
     return
   fi
@@ -98,10 +94,16 @@ build() {
     "$dir_root"/common/metadata.yaml \
     --output="$dir_out"/"$1".pdf
 
-    cd ..
+  cd ..
 }
 
-build_target=''
+check_dependency pandoc
+
+dir_root=$(dirname "$(readlink -f "$0")")
+dir_notes=$dir_root/notes
+dir_out=$dir_root/out
+
+build_target=""
 
 while getopts hVvn:b: opt; do
   case $opt in
@@ -113,7 +115,7 @@ while getopts hVvn:b: opt; do
 done
 
 cd "$dir_notes"
-if [ -z "$build_target" ]; then
+if [[ -z $build_target ]]; then
   for dir in *; do
     build "$dir"
   done
