@@ -8,13 +8,13 @@ log() {
 
 usage() {
   cat <<EOM
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-n name] [-b name]
+Usage: $(basename "${BASH_SOURCE[0]}") [-n name] [-b name] [-v] [-h]
 
 Available options:
--h    Print this help and exit
--v    Enable verbose output
 -n    Initialize new notes directory
 -b    Compile only specified notes
+-v    Enable verbose output
+-h    Print this help and exit
 EOM
   exit
 }
@@ -105,20 +105,20 @@ dir_out=$dir_root/out
 
 build_target=""
 
-while getopts hVvn:b: opt; do
+while getopts n:b:vh opt; do
   case $opt in
-  v) set -x ;;
   n) init "$OPTARG" ;;
   b) build_target="$OPTARG" ;;
+  v) set -x ;;
   h | *) usage ;;
   esac
 done
 
 cd "$dir_notes"
-if [[ -z $build_target ]]; then
+if [[ -n $build_target ]]; then
+  build "$build_target"
+else
   for dir in *; do
     build "$dir"
   done
-else
-  build "$build_target"
 fi
