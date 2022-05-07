@@ -14,11 +14,10 @@ log() {
 
 usage() {
   cat <<EOM
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-V] [-v] [-n name] [-b name]
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-n name] [-b name]
 
 Available options:
 -h    Print this help and exit
--V    Print version and exit
 -v    Enable verbose output
 -n    Initialize new notes directory
 -b    Compile only specified notes
@@ -106,7 +105,6 @@ build_target=''
 
 while getopts hVvn:b: opt; do
   case $opt in
-  V) version ;;
   v) set -x ;;
   n) init "$OPTARG" ;;
   b) build_target="$OPTARG" ;;
