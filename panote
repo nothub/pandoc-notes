@@ -99,7 +99,7 @@ build() {
 
 check_dependency pandoc
 
-dir_root=$(dirname "$(readlink -f "$0")")
+dir_root="$(dirname "$(readlink -f -- "$0")")"
 dir_notes=$dir_root/notes
 dir_out=$dir_root/out
 
