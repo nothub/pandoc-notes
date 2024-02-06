@@ -26,7 +26,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Publish documents
-        uses: csexton/release-asset-action@v2
+        uses: csexton/release-asset-action@v3
         with:
           pattern: "out/*.pdf"
           github-token: ${{ secrets.GITHUB_TOKEN }}
